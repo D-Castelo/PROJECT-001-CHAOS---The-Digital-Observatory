@@ -1,313 +1,198 @@
 # PROJECT 001: CHAOS — The Digital Observatory
 
-The beginning of my personal laboratory.
+> Observe. Understand. Create. Improve.
 
-CHAOS is a long-term project focused on observation, computation, experimentation, and the development of systems that can understand and interact with the world around them.
+## Overview
 
-## Current Stage — V0.7
+CHAOS is a personal engineering and technology laboratory designed to observe, understand, analyze, and eventually interact with the digital and physical world.
 
-The first stage of CHAOS began with something simple:
+It begins as a Digital Observatory: a system capable of collecting information from computer hardware, organizing observations, storing historical data, identifying events, and presenting information through a visual interface.
 
-**observing the computer it is running on.**
+However, the long-term vision extends far beyond system monitoring.
 
-CHAOS then evolved from simply observing information to **organizing and storing what it observes**.
+CHAOS is intended to evolve into an integrated environment for experimentation, engineering, simulation, intelligent systems, and technological creation.
 
-The next step was **retrieving and analyzing historical observations**.
+The project follows a continuous cycle:
 
-CHAOS has now taken another major step:
+**Observe → Represent → Store → Analyze → Reason → Create → Build → Measure → Improve.**
 
-**integrating its observation systems into a single Digital Observatory capable of detecting events in the environment it observes.**
+## Current Stage — V0.8: Visual Observatory
 
-The project has expanded from individual observation modules into a system where multiple sources of information can be collected, combined, stored, analyzed, and interpreted through deterministic rules.
+CHAOS has evolved from a command-line observation system into a web-based observatory.
 
-The current conceptual flow is:
+The current architecture includes hardware monitoring, data collection, SQLite storage, basic analysis, deterministic event detection, and a live dashboard accessible through a local web server.
 
-```text
-Observe → Store → Retrieve → Analyze → Detect
-```
+The project also contains an initial Environment module for future physical-world observations.
 
-This is the foundation upon which future CHAOS systems will be built.
+## System Architecture
 
-### Current Systems
+### 1. Hardware Observation — Core
 
-**CPU Observation**
+The Core modules collect information about the computer's hardware and operating environment.
 
-* CPU usage
-* CPU frequency
-* Physical CPU cores
-* Logical CPU cores
+**CPU**
+- CPU usage.
+- Current frequency.
+- Physical cores.
+- Logical cores.
 
-The CPU observation system uses a function that collects fresh CPU information whenever it is called, allowing CHAOS to observe the computer dynamically.
+**GPU**
+- GPU identification.
+- GPU utilization.
+- Temperature.
+- Clock speed.
+- VRAM.
+- Power consumption.
+- Fan speed.
 
-**GPU Observation**
+GPU monitoring currently uses AMD ADLX.
 
-CHAOS can now observe AMD GPU information through AMD ADLX.
+**Disk**
+- Storage devices.
+- Mount points.
+- Filesystem.
+- Total capacity.
+- Used and available space.
+- Usage percentage.
 
-Current GPU observations include:
+**Memory**
+- RAM total, available, used, and usage percentage.
+- Swap total, used, and usage percentage.
 
-* GPU name
-* GPU usage
-* GPU temperature
-* GPU clock speed
-* VRAM usage
-* GPU power consumption
-* GPU fan speed
+**System**
+- Operating system.
+- Hostname.
+- OS release.
+- Machine architecture.
+- Python version.
+- Boot time.
+- Uptime.
 
-This allows CHAOS to observe not only the general computer system, but also the dedicated graphics processor.
+### 2. Activity Observation
 
-**Disk Observation**
+CHAOS also observes activity occurring inside the operating system.
 
-* Disk device
-* Mount point
-* Filesystem
-* Total storage
-* Used storage
-* Free storage
-* Storage usage percentage
+**Processes**
+- Process identification.
+- PID.
+- Process name.
+- Status.
+- CPU usage.
+- Memory usage.
 
-CHAOS can observe multiple storage devices and evaluate their current state.
+**Network**
+- Network interfaces.
+- Interface addresses.
+- Address families.
+- Bytes sent and received.
+- Packets sent and received.
 
-**Memory Observation**
+### 3. Environment — Physical Observation
 
-* Total RAM
-* Available RAM
-* Used RAM
-* RAM usage percentage
-* Total swap memory
-* Used swap memory
-* Swap usage percentage
+The Environment module establishes the initial structure for observing conditions outside the computer itself.
 
-**System Observation**
+Current modules:
+- `humidity.py` — humidity observation.
+- `light.py` — light observation.
+- `temperature.py` — temperature observation.
 
-* Operating system
-* System node
-* System release
-* Machine architecture
-* Python version
-* Boot time
-* System uptime
+These modules are part of the developing architecture. Physical sensor integration and unified environmental observation remain future development tasks.
 
-**Process Observation**
+### 4. Data System
 
-CHAOS can now observe currently running processes.
+The Data system provides the foundation for organizing and preserving observations.
 
-Process observations include:
+Current capabilities:
+- Python data structures.
+- SQLite database.
+- SQL tables.
+- Historical observation storage.
+- Data retrieval.
+- Parameterized queries.
+- JSON serialization.
 
-* Process ID
-* Process name
-* Process status
-* CPU usage
-* Memory usage
+Complete observations can be stored as structured JSON records in the database.
 
-This allows CHAOS to observe not only the hardware itself, but also what is actively running on the system.
+### 5. Orchestration — CHAOS
 
-**Network Observation**
+The `CHAOS` module acts as the central orchestrator.
 
-CHAOS can observe the computer's network interfaces and their current state.
+It brings together the observation modules and creates a unified representation of the system.
 
-Current network observations include:
+Current observation flow:
 
-* Interface name
-* Network addresses
-* Address family
-* Bytes sent
-* Bytes received
-* Packets sent
-* Packets received
+`CPU + GPU + Disk + Memory + System + Processes + Network`
 
-This extends CHAOS's observation capabilities beyond the local hardware and into the communication layer of the system.
+The resulting observation can be processed by the event detection system and stored in the database.
 
-## Data System
+### 6. Event Detection
 
-The Data layer is responsible for receiving, organizing, storing, and retrieving information collected by CHAOS.
+CHAOS currently supports deterministic event detection.
 
-Currently, it uses:
+Implemented example:
+- High disk usage detection.
+- Configurable threshold logic.
+- Structured event creation.
 
-* Python dictionaries for structured data
-* SQLite for persistent storage
-* SQL tables for organizing collected information
-* SQL queries for retrieving stored observations
-* Parameterized queries for dynamic filtering
-* JSON serialization for storing complete observations
+Events contain:
+- Type.
+- Source.
+- Message.
+- Associated data.
 
-CHAOS can now store a complete observation containing information from multiple observation systems.
+The current disk usage alert uses a 90% threshold.
 
-The current data flow is:
+### 7. Data Analysis
 
-```text
-                    CHAOS
-                      │
-                      ▼
-                  Observation
-                      │
-        ┌─────────────┼─────────────┐
-        │             │             │
-       Core        Processes      Network
-        │
-        ├── CPU
-        ├── GPU
-        ├── Disk
-        ├── Memory
-        └── System
-                      │
-                      ▼
-                    Data
-                      │
-                      ▼
-                   SQLite
-                      │
-                      ▼
-                 Historical Data
-```
+The project includes initial analytical capabilities.
 
-Previously, CHAOS primarily stored CPU observations.
+Current examples:
+- Average CPU usage calculation.
+- Retrieval of historical CPU observations.
+- Basic analysis of collected information.
 
-It can now store a broader representation of the state of the computer.
+Future analytical capabilities include:
+- Trend analysis.
+- Threshold monitoring.
+- Anomaly detection.
+- Historical comparisons.
+- Correlation analysis.
+- Pattern recognition.
 
-This represents an important transition from:
+Current analysis is deterministic and rule-based, not AI-driven.
 
-```text
-Individual Observation
-```
+### 8. Continuous Observation
 
-to:
+CHAOS includes scheduled observation capabilities.
 
-```text
-Complete System Observation
-```
+The current scheduler can collect CPU usage at regular intervals, with a 10-minute interval configured for the initial scheduled observation workflow.
 
-## CHAOS Orchestrator
+The long-term objective is to establish continuous observation cycles across the entire system.
 
-The `CHAOS` layer now acts as the central orchestration layer for the observatory.
+### 9. Visual Observatory — Frontend
 
-The `observe()` function collects information from the different observation systems and combines them into a single observation.
+V0.8 introduces a web-based interface for visualizing system observations.
 
-Conceptually:
+The frontend is built with Flask, HTML, CSS, and JavaScript.
 
-```text
-CPU ───────┐
-GPU ───────┤
-Disk ──────┤
-Memory ────┤
-System ────┤
-Processes ─┤──→ CHAOS.observe()
-Network ───┘          │
-                      ▼
-                Complete Observation
-```
+Current capabilities:
+- Local Flask web server.
+- JSON observation API.
+- Hardware monitoring dashboard.
+- CPU, memory, GPU, and storage metrics.
+- Hardware information panels.
+- System event visualization.
+- Automatic dashboard updates every 3 seconds.
 
-This allows CHAOS to operate as a single system rather than as a collection of unrelated modules.
+The frontend retrieves information through the `/api/observation` endpoint.
 
-## Event Detection
+The dashboard provides a visual layer over the existing observation architecture.
 
-CHAOS has now begun detecting events from its observations.
-
-The first event detector monitors disk usage.
-
-When a disk reaches or exceeds the configured threshold, CHAOS generates an event.
-
-For example:
-
-```text
-C:\ → 92.0% usage
-        │
-        ▼
-   Threshold: 90%
-        │
-        ▼
-   Event detected
-```
-
-The resulting event contains:
-
-* Event type
-* Event source
-* Human-readable message
-* Relevant observation data
-
-Example:
-
-```python
-{
-    "type": "disk_high_usage",
-    "source": "Disk",
-    "message": "C:\\ is using 92.0% of its capacity.",
-    "data": {...}
-}
-```
-
-This represents the beginning of a transition from:
-
-```text
-Observation → Storage
-```
-
-toward:
-
-```text
-Observation → Analysis → Detection
-```
-
-CHAOS is no longer only recording what exists.
-
-It has begun recognizing when something important happens.
-
-## Data Analysis
-
-CHAOS has begun its first basic analysis operations.
-
-The current data system can calculate the average CPU usage of a collection of historical observations.
-
-For example:
-
-```text
-22.8%
-13.5%
-35.9%
-44.0%
-21.8%
-```
-
-can produce:
-
-```text
-Average CPU usage: 27.6%
-```
-
-This represents the beginning of the analytical foundation of CHAOS.
-
-The long-term goal is to expand analysis beyond simple averages into:
-
-* Trends
-* Threshold detection
-* Anomaly detection
-* Historical comparisons
-* Correlations
-* Pattern recognition
-
-These systems will initially be deterministic and computational rather than AI-driven.
-
-## Continuous Observation
-
-CHAOS includes a scheduler capable of collecting CPU observations at regular intervals.
-
-The current CPU observation interval is:
-
-```text
-10 minutes
-```
-
-This creates a growing historical record of CPU activity.
-
-Continuous observation will eventually be expanded to the complete CHAOS observation cycle.
-
-## Current Architecture
-
-The current architecture is:
+## Project Structure
 
 ```text
 PROJECT-001-CHAOS/
-
+│
 ├── Core/
 │   ├── __init__.py
 │   ├── cpu.py
@@ -333,52 +218,129 @@ PROJECT-001-CHAOS/
 │   ├── __init__.py
 │   └── processes.py
 │
+├── Environment/
+│   ├── humidity.py
+│   ├── light.py
+│   └── temperature.py
+│
 ├── CHAOS/
 │   ├── __init__.py
 │   └── chaos.py
+│
+├── Frontend/
+│   ├── app.py
+│   ├── templates/
+│   │   └── index.html
+│   └── static/
+│       ├── css/
+│       │   └── style.css
+│       └── js/
+│           └── dashboard.js
 │
 ├── .gitignore
 └── README.md
 ```
 
-Runtime data such as `data.db` and Python-generated cache files are excluded from the source repository.
-
 ## Technologies
 
-* Python
-* psutil
-* SQLite
-* sqlite3
-* schedule
-* platform
-* time
-* JSON
-* AMD ADLX
+**Programming**
+- Python
 
-## Current Conceptual Model
+**Hardware and System Observation**
+- psutil
+- AMD ADLX
+- platform
 
-CHAOS is gradually being built around the following loop:
+**Data and Storage**
+- SQLite
+- sqlite3
+- JSON
 
-```text
-Observe
-   ↓
-Store
-   ↓
-Retrieve
-   ↓
-Analyze
-   ↓
-Detect
-   ↓
-Improve
-   ↓
-Observe Again
-```
+**Automation**
+- schedule
+- time
 
-The current system is still deterministic.
+**Web Interface**
+- Flask
+- HTML
+- CSS
+- JavaScript
 
-It does not yet attempt to understand the world through artificial intelligence.
+## Conceptual Model
 
-Instead, the objective is to first build a real observatory capable of collecting reliable information and developing a history of what it observes.
+CHAOS currently follows this development model:
 
-AI and more advanced reasoning
+`Observe → Store → Retrieve → Analyze → Detect → Visualize → Improve → Observe Again`
+
+This model will evolve as the system gains more sophisticated analytical, engineering, and reasoning capabilities.
+
+## Future Development
+
+The next stages will expand the observatory into a broader engineering environment.
+
+Potential development directions include:
+
+- Historical data visualization.
+- More comprehensive event detection.
+- Continuous observation across all modules.
+- Physical sensor integration.
+- Environmental monitoring.
+- Advanced data analysis.
+- Anomaly detection and predictive capabilities.
+- Simulation and experimentation tools.
+- AI-assisted analysis and reasoning.
+
+AI and more advanced reasoning systems will be introduced on top of this foundation as the architecture matures.
+
+## Project Status
+
+**Development Status:** In active development.
+
+**Current Version:** V0.8 — Visual Observatory.
+
+**Core Observation**
+- CPU.
+- GPU.
+- Disk.
+- Memory.
+- System information.
+
+**Activity Observation**
+- Processes.
+- Network interfaces and traffic.
+
+**Environment**
+- Initial humidity, light, and temperature modules.
+- Physical sensor integration still under development.
+
+**Data**
+- SQLite storage.
+- Historical observation retrieval.
+- Complete observation serialization.
+
+**Analysis**
+- Basic CPU analysis.
+- Deterministic event detection.
+
+**Automation**
+- Scheduled CPU observation.
+
+**Orchestration**
+- Unified observation through `CHAOS`.
+
+**Frontend**
+- Flask server.
+- JSON API.
+- Live hardware dashboard.
+- Automatic updates.
+
+**Next Milestones**
+- Historical visualization.
+- Expanded event detection.
+- Continuous observation.
+- Physical sensor integration.
+- More sophisticated analysis.
+
+---
+
+*CHAOS is not intended to remain a system monitor. The Digital Observatory is only the beginning.*

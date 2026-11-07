@@ -1,0 +1,268 @@
+
+:root {
+    --background: #101418; /* Main midnight background. */
+    --surface: #1A2229; /* Card background. */
+    --surface-light: #222D35; /* Slightly lighter surfaces. */
+    --gold: #D6B66F; /* Architectural gold accent. */
+    --cyan: #78C9CC; /* Technology accent. */
+    --text: #EAE7DF; /* Main ivory text. */
+    --muted: #929DA3; /* Secondary text. */
+    --border: rgba(214, 182, 111, 0.18); /* Subtle gold borders. */
+}
+
+* {
+    margin: 0; /* Removes browser default margins. */
+    padding: 0; /* Removes browser default padding. */
+    box-sizing: border-box; /* Makes sizing predictable. */
+}
+
+body {
+    background: var(--background); /* Sets the page background. */
+    color: var(--text); /* Sets default text color. */
+    font-family: "Segoe UI", Arial, sans-serif; /* Sets the interface font. */
+    min-height: 100vh; /* Makes the page at least as tall as the screen. */
+}
+
+.dashboard {
+    max-width: 1500px; /* Limits dashboard width on large screens. */
+    margin: auto; /* Centers the dashboard. */
+    padding: 35px 5%; /* Adds breathing room around the interface. */
+}
+
+.topbar {
+    display: flex; /* Places brand and status side by side. */
+    justify-content: space-between; /* Pushes them to opposite sides. */
+    align-items: center; /* Aligns them vertically. */
+    padding-bottom: 25px; /* Adds space below the header. */
+    border-bottom: 1px solid var(--border); /* Separates the header. */
+}
+
+.brand h1 {
+    color: var(--gold); /* Highlights the CHAOS name. */
+    font-size: 32px; /* Sets the main brand size. */
+    letter-spacing: 7px; /* Gives the title a distinctive appearance. */
+}
+
+.brand p {
+    color: var(--muted); /* Subdued subtitle. */
+    font-size: 10px; /* Small subtitle text. */
+    letter-spacing: 3px; /* Spaced-out subtitle. */
+    margin-top: 5px; /* Separates subtitle from title. */
+}
+
+.system-status {
+    display: flex; /* Places indicator and text in one row. */
+    align-items: center; /* Aligns the status vertically. */
+    gap: 10px; /* Separates indicator and label. */
+    color: var(--cyan); /* Uses cyan for online status. */
+    font-size: 11px; /* Keeps status discreet. */
+    letter-spacing: 2px; /* Adds technical character. */
+}
+
+.status-indicator {
+    width: 8px; /* Indicator width. */
+    height: 8px; /* Indicator height. */
+    border-radius: 50%; /* Makes it circular. */
+    background: var(--cyan); /* Gives it the online color. */
+    box-shadow: 0 0 12px var(--cyan); /* Adds a subtle glow. */
+}
+
+.welcome {
+    display: flex; /* Places title and update time side by side. */
+    justify-content: space-between; /* Separates both sections. */
+    align-items: end; /* Aligns content along the bottom. */
+    margin: 45px 0 30px; /* Creates space around the introduction. */
+}
+
+.eyebrow {
+    color: var(--gold); /* Highlights the section label. */
+    font-size: 10px; /* Small label. */
+    letter-spacing: 3px; /* Gives it a refined appearance. */
+    margin-bottom: 12px; /* Separates it from the heading. */
+}
+
+.welcome h2 {
+    font-size: clamp(25px, 4vw, 38px); /* Scales heading with screen width. */
+    font-weight: 400; /* Keeps the heading elegant. */
+}
+
+.muted {
+    color: var(--muted); /* Styles secondary information. */
+    font-size: 13px; /* Keeps secondary text compact. */
+    margin-top: 8px; /* Adds a little separation. */
+}
+
+.last-update {
+    display: flex; /* Arranges label and time vertically. */
+    flex-direction: column; /* Stacks the two elements. */
+    gap: 7px; /* Separates them. */
+    text-align: right; /* Aligns time to the right. */
+    font-size: 11px; /* Keeps metadata small. */
+    letter-spacing: 1px; /* Adds subtle spacing. */
+}
+
+.last-update strong {
+    color: var(--cyan); /* Highlights the timestamp. */
+    font-size: 14px; /* Makes the timestamp readable. */
+}
+
+.metrics-grid {
+    display: grid; /* Creates a card grid. */
+    grid-template-columns: repeat(4, 1fr); /* Four equal columns on desktop. */
+    gap: 18px; /* Space between cards. */
+}
+
+.metric-card, .panel {
+    background: var(--surface); /* Gives cards their dark surface. */
+    border: 1px solid var(--border); /* Adds subtle outlines. */
+    border-radius: 8px; /* Softens the corners. */
+}
+
+.metric-card {
+    padding: 22px; /* Adds internal breathing room. */
+    min-width: 0; /* Prevents grid overflow. */
+}
+
+.card-heading, .panel-heading {
+    display: flex; /* Places heading and index side by side. */
+    justify-content: space-between; /* Separates both elements. */
+    align-items: center; /* Aligns them vertically. */
+}
+
+.card-heading {
+    color: var(--muted); /* Styles the metric label. */
+    font-size: 11px; /* Keeps label compact. */
+    letter-spacing: 2px; /* Adds a technical look. */
+}
+
+.card-symbol, .panel-index {
+    color: var(--gold); /* Highlights the numbered index. */
+    opacity: 0.7; /* Keeps the index subtle. */
+}
+
+.metric-value {
+    display: block; /* Gives the value its own line. */
+    font-size: clamp(28px, 3vw, 38px); /* Scales the measurement. */
+    font-weight: 400; /* Keeps numbers light. */
+    margin: 25px 0 18px; /* Separates value from other content. */
+}
+
+.progress-track {
+    width: 100%; /* Uses the full card width. */
+    height: 4px; /* Creates a slim progress indicator. */
+    background: var(--surface-light); /* Track background. */
+    border-radius: 10px; /* Rounds the track. */
+    overflow: hidden; /* Keeps fill inside the track. */
+}
+
+.progress-fill {
+    height: 100%; /* Fills the track vertically. */
+    width: 0%; /* Starts empty until data arrives. */
+    transition: width 0.5s ease; /* Smoothly animates updates. */
+}
+
+.gold { background: var(--gold); } /* Gold measurement bar. */
+.cyan { background: var(--cyan); } /* Cyan measurement bar. */
+
+.metric-detail {
+    color: var(--muted); /* Styles supporting information. */
+    font-size: 11px; /* Keeps detail text compact. */
+    margin-top: 14px; /* Separates detail from progress bar. */
+}
+
+.lower-grid {
+    display: grid; /* Creates a second row of panels. */
+    grid-template-columns: 1fr 1fr; /* Two equal-width panels. */
+    gap: 18px; /* Space between panels. */
+    margin-top: 20px; /* Separates panels from metric cards. */
+}
+
+.panel {
+    padding: 24px; /* Adds internal space. */
+    min-height: 230px; /* Gives panels a consistent initial height. */
+}
+
+.panel-heading {
+    padding-bottom: 18px; /* Separates heading from panel content. */
+    border-bottom: 1px solid var(--border); /* Divides heading and content. */
+}
+
+.panel-heading h3 {
+    font-size: 11px; /* Keeps panel headings compact. */
+    font-weight: 500; /* Gives headings moderate emphasis. */
+    letter-spacing: 2px; /* Adds the CHAOS visual style. */
+}
+
+.detail-list, .event-list {
+    padding-top: 15px; /* Adds space below panel heading. */
+}
+
+.detail-row, .event-row {
+    display: flex; /* Places labels and values in a row. */
+    justify-content: space-between; /* Separates labels and values. */
+    gap: 12px; /* Prevents elements from touching. */
+    padding: 10px 0; /* Adds vertical breathing room. */
+    border-bottom: 1px solid rgba(255,255,255,0.05); /* Subtle row divider. */
+    font-size: 12px; /* Keeps details compact. */
+}
+
+.detail-row span:first-child {
+    color: var(--muted); /* Styles the detail label. */
+}
+
+.detail-row span:last-child {
+    text-align: right; /* Aligns detail values. */
+    overflow-wrap: anywhere; /* Prevents long hardware names from overflowing. */
+}
+
+.event-row {
+    align-items: center; /* Vertically aligns event information. */
+}
+
+.event-type {
+    color: var(--gold); /* Highlights event type. */
+    font-size: 10px; /* Keeps event label compact. */
+    letter-spacing: 1px; /* Adds subtle technical styling. */
+}
+
+footer {
+    display: flex; /* Places footer labels side by side. */
+    justify-content: space-between; /* Pushes labels apart. */
+    margin-top: 40px; /* Separates footer from panels. */
+    padding-top: 18px; /* Adds space above footer text. */
+    border-top: 1px solid var(--border); /* Separates footer visually. */
+    color: var(--muted); /* Uses secondary text color. */
+    font-size: 9px; /* Keeps footer discreet. */
+    letter-spacing: 2px; /* Adds the visual identity. */
+}
+
+@media (max-width: 900px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr); /* Uses two metric columns on tablets. */
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard {
+        padding: 24px 5%; /* Reduces page padding on phones. */
+    }
+
+    .welcome {
+        flex-direction: column; /* Stacks introduction and update time. */
+        align-items: start; /* Aligns content to the left. */
+        gap: 20px; /* Separates stacked content. */
+    }
+
+    .last-update {
+        text-align: left; /* Aligns update time to the left. */
+    }
+
+    .metrics-grid, .lower-grid {
+        grid-template-columns: 1fr; /* Uses one column on small screens. */
+    }
+
+    footer {
+        flex-direction: column; /* Stacks footer labels. */
+        gap: 10px; /* Separates footer labels. */
+    }
+}

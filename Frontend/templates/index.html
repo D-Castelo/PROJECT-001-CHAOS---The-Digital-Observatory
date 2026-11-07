@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Enables standard characters. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the dashboard responsive. -->
+    <title>CHAOS | Digital Observatory</title> <!-- Browser tab title. -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- Loads the dashboard styling. -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script> <!-- Loads JavaScript after HTML parsing. -->
+</head>
+<body>
+    <div class="dashboard"> <!-- Main dashboard container. -->
+
+        <header class="topbar"> <!-- Top navigation and identity. -->
+            <div class="brand">
+                <h1>CHAOS</h1> <!-- Project name. -->
+                <p>THE DIGITAL OBSERVATORY</p> <!-- Project subtitle. -->
+            </div>
+            <div class="system-status">
+                <span class="status-indicator"></span> <!-- Live status light. -->
+                <span id="connection-status">CONNECTING</span> <!-- JavaScript updates connection status. -->
+            </div>
+        </header>
+
+        <main>
+            <section class="welcome">
+                <div>
+                    <p class="eyebrow">SYSTEM OVERVIEW</p>
+                    <h2>Observation begins here.</h2>
+                    <p class="muted">A window into the systems around us.</p>
+                </div>
+                <div class="last-update">
+                    <span class="muted">LAST UPDATE</span>
+                    <strong id="last-update">--:--:--</strong>
+                </div>
+            </section>
+
+            <section class="metrics-grid"> <!-- Main measurement cards. -->
+
+                <article class="metric-card">
+                    <div class="card-heading"><span>CPU</span><span class="card-symbol">01</span></div>
+                    <strong class="metric-value" id="cpu-usage">--%</strong>
+                    <div class="progress-track"><div class="progress-fill gold" id="cpu-bar"></div></div>
+                    <p class="metric-detail" id="cpu-detail">Waiting for data...</p>
+                </article>
+
+                <article class="metric-card">
+                    <div class="card-heading"><span>MEMORY</span><span class="card-symbol">02</span></div>
+                    <strong class="metric-value" id="memory-usage">--%</strong>
+                    <div class="progress-track"><div class="progress-fill cyan" id="memory-bar"></div></div>
+                    <p class="metric-detail" id="memory-detail">Waiting for data...</p>
+                </article>
+
+                <article class="metric-card">
+                    <div class="card-heading"><span>GPU</span><span class="card-symbol">03</span></div>
+                    <strong class="metric-value" id="gpu-usage">--%</strong>
+                    <div class="progress-track"><div class="progress-fill gold" id="gpu-bar"></div></div>
+                    <p class="metric-detail" id="gpu-detail">Waiting for data...</p>
+                </article>
+
+                <article class="metric-card">
+                    <div class="card-heading"><span>STORAGE</span><span class="card-symbol">04</span></div>
+                    <strong class="metric-value" id="disk-usage">--%</strong>
+                    <div class="progress-track"><div class="progress-fill cyan" id="disk-bar"></div></div>
+                    <p class="metric-detail" id="disk-detail">Waiting for data...</p>
+                </article>
+
+            </section>
+
+            <section class="lower-grid">
+                <article class="panel">
+                    <div class="panel-heading">
+                        <h3>HARDWARE OBSERVATION</h3>
+                        <span class="panel-index">/ 001</span>
+                    </div>
+                    <div id="hardware-details" class="detail-list">
+                        <p class="muted">Collecting hardware information...</p>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-heading">
+                        <h3>SYSTEM EVENTS</h3>
+                        <span class="panel-index">/ 002</span>
+                    </div>
+                    <div id="system-events" class="event-list">
+                        <p class="muted">Waiting for events...</p>
+                    </div>
+                </article>
+            </section>
+
+            <footer>
+                <span>CHAOS — PROJECT 001</span>
+                <span>OBSERVE · ANALYZE · CREATE</span>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
